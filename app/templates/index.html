@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if g.user.is_authenticated() %}
+    <h1>Hi, <a href="{{ url_for('user', nickname=user.nickname) }}">{{ g.user.nickname }}</a>!</h1>
+    {% else %}
+    <h1>Welcome!</h1>
+    {% endif %}
+    <br>
+    <ul class="kwicks gameMenu">
+        <li id="option1">
+            <a href="{{ url_for('game') }}"></a>
+        </li>
+        <li id="option2">
+        </li>
+        <li id="option3">
+        </li>
+    </ul>
+
+    <style>
+        .kwicks {
+                height: 100px;
+        }
+        .kwicks > li {
+            height: 100px;
+            /* overridden by kwicks but good for when JavaScript is disabled */
+            width: 25vw;
+            margin-left: 5px;
+            float: left;
+        }
+        #option1 { background: #53b388; }
+        #option2 { background: #5a69a9; }
+        #option3 { background: #c26468; margin-right: 0px; }
+        #option1.hoverover { background: #86e6bb; }
+        #option2.hoverover { background: #8d9cdc; }
+        #option3.hoverover { background: #f5979b; }
+    </style>
+
+    <script>
+     $('.kwicks').kwicks({
+         maxSize : $( window ).width()/2,
+         duration: 100,
+         behavior: 'menu'
+     });
+    </script>
+{% endblock %}
