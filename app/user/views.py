@@ -4,10 +4,20 @@ from flask.ext.login import login_user, logout_user, current_user, login_require
 from app import app, lm, oid, db
 from app.user.models import User, Email
 from app.user.forms import LoginForm, EditForm
+from app.user.constants import ROWS_PER_PAGE
+
+
+@app.before_request
+def before_request():
+    g.user = current_user
+    if g.user.is_authenticated():
+        g.user.last_seen = datetime.utcnow()
+        db.session.add(g.user)
+        db.session.commit()
 
 
 @app.route('/')
-@app.route('/index')
+@app.route('/index',)
 def index():
     user = g.user
     return render_template('index.html',
@@ -18,16 +28,6 @@ def index():
 @lm.user_loader
 def load_user(id):
     return User.query.get(int(id))
-
-
-
-@app.before_request
-def before_request():
-    g.user = current_user
-    if g.user.is_authenticated():
-        g.user.last_seen = datetime.utcnow()
-        db.session.add(g.user)
-        db.session.commit()
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -59,6 +59,8 @@ def after_login(resp):
         if nickname is None or nickname == "":
             nickname = resp.email.split('@')[0]
         joined = datetime.utcnow()
+        nickname = User.make_valid_nickname(nickname)
+        nickname = User.make_unique_nickname(nickname)
         user = User(nickname=nickname, joined=joined, full_name=resp.fullname)
         db.session.add(user)
         db.session.commit()
@@ -107,3 +109,18 @@ def edit():
     else:
         form.nickname.data = g.user.nickname
     return render_template('user/edit.html', form=form)
+
+
+@app.route('/leaderboard')
+@app.route('/leaderboard/')
+@app.route('/leaderboard/<int:page>')
+def leaderboard(page=1):
+    grabbed_rows = User.query.order_by(User.money.desc()).paginate(page, ROWS_PER_PAGE, False).items
+    leaderboard_rows = map(lambda row: {'nickname': row.nickname,
+                                        'money': row.money},
+                           grabbed_rows)
+    for number, row in enumerate(leaderboard_rows):
+        row['position'] = (page - 1)*ROWS_PER_PAGE + number + 1
+    print(leaderboard_rows)
+    return render_template('game/leaderboard.html',
+                           leaderboard_rows=leaderboard_rows)

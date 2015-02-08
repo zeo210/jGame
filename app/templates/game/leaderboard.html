@@ -1,4 +1,55 @@
 <!-- extend base layout -->
 {% extends "base.html" %}
 
-<h1>Leaderboard goes here</h1>
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h1>jGame Leaderboard</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <table class="table table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nickname</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in leaderboard_rows %}
+                    <tr valign="top">
+                        <td>{{ row.position }}</td>
+                        <td>
+                            <a href="{{ url_for('user', nickname=row.nickname) }}">
+                                {{ row.nickname }}
+                            </a>
+                        </td>
+                        <td>{{ row.money }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% if leaderboard_rows.has_prev %}
+            <a href="{{ url_for('leaderboard', page=leaderboard_rows.prev_num) }}">
+                &lt;&lt; Higher ranks
+            </a>
+            {% endif %}
+            {% if leaderboard_rows.has_next and leaderboard_rows.has_prev %}
+            |
+            {% endif %}
+            {% if leaderboard_rows.has_next %}
+            <a href="{{ url_for('leaderboard', page=leaderboard_rows.next_num) }}">
+                Lower ranks &gt;&gt;
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

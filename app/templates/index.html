@@ -1,46 +1,37 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% if g.user.is_authenticated() %}
-    <h1>Hi, <a href="{{ url_for('user', nickname=user.nickname) }}">{{ g.user.nickname }}</a>!</h1>
-    {% else %}
-    <h1>Welcome!</h1>
-    {% endif %}
-    <br>
-    <ul class="kwicks gameMenu">
-        <li id="option1">
-            <a href="{{ url_for('game') }}"></a>
-        </li>
-        <li id="option2">
-        </li>
-        <li id="option3">
-        </li>
-    </ul>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+          {% if g.user.is_authenticated() %}
+              <h1>Hi, <a href="{{ url_for('user', nickname=user.nickname) }}">{{ g.user.nickname }}</a>!</h1>
+              <p>Pick out a game below to start playing!</p>
+          {% else %}
+              <h1>Welcome!</h1>
+              <p>Login with your OpenID and start playing the game!</p>
+              <p><a class="btn btn-primary btn-lg" href="{{ url_for('login') }}" role="button">Login! &raquo;</a></p>
+          {% endif %}
+      </div>
+    </div>
 
-    <style>
-        .kwicks {
-                height: 100px;
-        }
-        .kwicks > li {
-            height: 100px;
-            /* overridden by kwicks but good for when JavaScript is disabled */
-            width: 25vw;
-            margin-left: 5px;
-            float: left;
-        }
-        #option1 { background: #53b388; }
-        #option2 { background: #5a69a9; }
-        #option3 { background: #c26468; margin-right: 0px; }
-        #option1.hoverover { background: #86e6bb; }
-        #option2.hoverover { background: #8d9cdc; }
-        #option3.hoverover { background: #f5979b; }
-    </style>
-
-    <script>
-     $('.kwicks').kwicks({
-         maxSize : $( window ).width()/2,
-         duration: 100,
-         behavior: 'menu'
-     });
-    </script>
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Play the game</h2>
+          <p>The main game mode of jGame! Wager points and answer the provide clue within the time limit. </p>
+          <p><a class="btn btn-default" href="{{ url_for('game') }}" role="button">Play Game &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>Play at your own pace</h2>
+          <p>Easily practice different questions without the timer going against you.</p>
+          <p><a class="btn btn-default" href="{{ url_for('game', option="practice") }}" role="button">Practice Game &raquo;</a></p>
+       </div>
+        <div class="col-md-4">
+          <h2>Follow along with the game</h2>
+          <p>Play the game without having to provide any input directly into the game.</p>
+          <p><a class="btn btn-default" href="{{ url_for('game', option="display") }}" role="button">Display Game &raquo;</a></p>
+        </div>
+      </div>
 {% endblock %}

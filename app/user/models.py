@@ -1,5 +1,6 @@
 from app import db
 from app.user import constants as USER
+from datetime import datetime
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -8,13 +9,14 @@ class User(db.Model):
                             lazy='dynamic')
     nickname = db.Column(db.String(64), index=True, unique=True)
     full_name = db.Column(db.String(64))
-    joined = db.Column(db.DateTime)
+    joined = db.Column(db.DateTime, default=datetime.utcnow())
     money = db.Column(db.Integer, default=USER.STARTING_MONEY)
     correct = db.Column(db.Integer, default=USER.STARTING_VALUE)
     incorrect = db.Column(db.Integer, default=USER.STARTING_VALUE)
     largest_win = db.Column(db.Integer, default=USER.STARTING_VALUE)
     largest_loss = db.Column(db.Integer, default=USER.STARTING_VALUE)
     last_seen = db.Column(db.DateTime)
+    money_check = db.CheckConstraint('money > 100')
 
     @staticmethod
     def make_unique_nickname(nickname):
