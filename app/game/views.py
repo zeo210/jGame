@@ -1,7 +1,6 @@
 from random import shuffle, randint
 import time
 from threading import Thread
-from datetime import datetime
 from flask.ext.login import current_user
 from flask import render_template, g, session, request, jsonify
 from flask.ext.socketio import emit
