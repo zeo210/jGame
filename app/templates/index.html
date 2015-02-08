@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+          {% if g.user.is_authenticated() %}
+              <h1>Hi, <a href="{{ url_for('user', nickname=user.nickname) }}">{{ g.user.nickname }}</a>!</h1>
+              <p>Pick out a game below to start playing!</p>
+          {% else %}
+              <h1>Welcome!</h1>
+              <p>Login with your OpenID and start playing the game!</p>
+              <p><a class="btn btn-primary btn-lg" href="{{ url_for('login') }}" role="button">Login! &raquo;</a></p>
+          {% endif %}
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Play the game</h2>
+          <p>The main game mode of jGame! Wager points and answer the provide clue within the time limit. </p>
+          <p><a class="btn btn-default" href="{{ url_for('game') }}" role="button">Play Game &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>Play at your own pace</h2>
+          <p>Easily practice different questions without the timer going against you.</p>
+          <p><a class="btn btn-default" href="{{ url_for('game', option="practice") }}" role="button">Practice Game &raquo;</a></p>
+       </div>
+        <div class="col-md-4">
+          <h2>Follow along with the game</h2>
+          <p>Play the game without having to provide any input directly into the game.</p>
+          <p><a class="btn btn-default" href="{{ url_for('game', option="display") }}" role="button">Display Game &raquo;</a></p>
+        </div>
+      </div>
+{% endblock %}

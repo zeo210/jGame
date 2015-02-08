@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<!-- extend base layout -->
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>User: {{ user.nickname }}!</h1>
+            {% if user.money %}<p>Total points: {{ user.money }}</p>{% endif %}
+            {% if user.largest_win %}<p>Largest win: +{{ user.largest_win }}</p>{% endif %}
+            {% if user.largest_loss %}<p>Largest loss: -{{ user.largest_loss }}</p>{% endif %}
+            {% if user.correct %}<p>Correct Answers: {{ user.correct }}</p>{% endif %}
+            {% if user.incorrect %}<p>Incorrect Answers: {{ user.incorrect }}</p>{% endif %}
+            {% if user.last_seen %}<p><i>Last seen on: {{ user.last_seen }}</i></p>{% endif %}
+            {% if user.id == g.user.id %}<p><a class="btn btn-default" href="{{ url_for('edit') }}">Edit</a></p>{% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
