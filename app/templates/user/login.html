@@ -1,10 +1,45 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<!-- extend from base layout -->
+{% extends "base.html" %}
+{% block content %}
 
-</body>
-</html>
+<script type="text/javascript">
+function set_openid(openid, pr)
+{
+    u = openid.search('<username>');
+    if (u != -1) {
+        // openid requires username
+        user = prompt('Enter your ' + pr + ' username:');
+        openid = openid.substr(0, u) + user
+    }
+    form = document.forms['login'];
+    form.elements['openid'].value = openid
+}
+</script>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h1>Sign In</h1>
+            <form action="" method="post" name="login">
+                {{ form.hidden_tag() }}
+                    Please enter your OpenID, or select one of the providers below:<br>
+                    {{ form.openid(class="form-control", placeholder="openID url") }}
+                    {% for error in form.openid.errors %}
+                        <span style="color: red;">[{{error}}]</span>
+                    {% endfor %}<br>
+                    <div class="btn-group" role="group">
+                    {% for pr in providers %}
+                    <a href="javascript:set_openid('{{ pr.url }}', '{{ pr.name }}');"
+                            class="btn btn-primary btn-sm" role="button">
+                        {{ pr.name }}
+                    </a>
+                    {% endfor %}
+                    </div>
+                <p>{{ form.remember_me }} Remember Me</p>
+                <div class="input-group">
+                    <p><input class="form-control" type="submit" value="Sign In"></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
