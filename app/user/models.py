@@ -1,4 +1,5 @@
 from app import db
+import re
 from app.user import constants as USER
 from datetime import datetime
 
@@ -17,6 +18,12 @@ class User(db.Model):
     largest_loss = db.Column(db.Integer, default=USER.STARTING_VALUE)
     last_seen = db.Column(db.DateTime)
     money_check = db.CheckConstraint('money > 100')
+
+
+    @staticmethod
+    def make_valid_nickname(nickname):
+        return re.sub('[^a-zA-Z0-9_\.]', '', nickname)
+
 
     @staticmethod
     def make_unique_nickname(nickname):
