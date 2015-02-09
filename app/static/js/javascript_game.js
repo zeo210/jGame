@@ -38,8 +38,8 @@ $("#next_question").click(function() {
                 $("#answer3_page3").text(data.selectable_answers[2]);
                 Reveal.left();
                 setTimeout(function(){
-                    $("#repeat_answer_page4").text(data.answer).removeAttr("style");
-                    $("#repeat_answer_page4").text("* No Answer *");
+                    $("#answer_page4").text(data.answer);
+                    $("#repeat_answer_page4").text("* No Answer *").removeAttr("style");
                 }, 800);
             });
 });
