@@ -111,7 +111,6 @@ def game_thread():
                   3,
                   {'answer': game_answer.answer},
                   '/_socket')
-        # produce result table
         emit_page('result page',
                   10,
                   {'total_difference': total_difference},
