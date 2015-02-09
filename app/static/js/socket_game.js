@@ -105,9 +105,9 @@ $(document).ready(function(){
             console.log(msg.total_difference);
             total_difference = msg.total_difference;
             if (msg.total_difference > 0)
-                $("#average_wager").text("+" + total_difference);
+                $("#point_difference").text("+" + total_difference);
             else
-                $("#average_wager").text(total_difference);
+                $("#point_difference").text(total_difference);
         }
     });
 
@@ -136,6 +136,7 @@ $(document).ready(function(){
             $("#repeat_answer_page5").css("color", "red");
         }
         console.log(msg.current_amount);
+        $("#user_amount").text(msg.current_amount);
     });
 
     socket.on('max wager response', function (msg){
