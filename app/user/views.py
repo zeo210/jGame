@@ -38,6 +38,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         session['remember_me'] = form.remember_me.data
+        print("valid form, trying to login")
         return oid.try_login(form.openid.data, ask_for=['nickname', 'email', 'fullname'])
     return render_template('user/login.html',
                            title='Sign In',
@@ -55,6 +56,7 @@ def after_login(resp):
     #new user logging in
     email = Email.query.filter_by(email=resp.email).first()
     if email is None:
+        print("new user")
         nickname = resp.nickname
         if nickname is None or nickname == "":
             nickname = resp.email.split('@')[0]
@@ -75,6 +77,7 @@ def after_login(resp):
     if 'remember_me' in session:
         remember_me = session['remember_me']
         session.pop('remember_me', None)
+    print(user)
     login_user(user, remember=remember_me)
     return redirect(request.args.get('next') or url_for('index'))
 
