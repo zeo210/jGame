@@ -127,3 +127,8 @@ def leaderboard(page=1):
     print(leaderboard_rows)
     return render_template('game/leaderboard.html',
                            leaderboard_rows=leaderboard_rows)
+
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
