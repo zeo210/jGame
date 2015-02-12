@@ -170,7 +170,6 @@ def get_user_entered_answer(msg):
             global user_win_amount
             global user_wager
             global total_difference
-            current_amount = current_user.money
             if current_user.id in user_win_amount:
                 if check:
                     current_user.money = user_win_amount[current_user.id]
@@ -187,6 +186,7 @@ def get_user_entered_answer(msg):
                 db.session.commit()
                 user_win_amount.pop(current_user.id)
                 user_wager.pop(current_user.id)
+        current_amount = current_user.money
         emit('answer response',
              {'check': check,
               'current_amount': current_amount})

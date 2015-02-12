@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="featurette-heading">Waiting Page <span class="text-muted">The holding room for new players.</span></h2>
+                <p class="lead">The first page you enter as you wait for the next round to start.</p>
+            </div>
+            <div class="col-md-5">
+                <img class="featurette-image img-responsive img-thumbnail" src="{{ url_for('.static', filename='img/How1.png') }}">
+            </div>
+        </div>
+        <hr class="featurette-divider">
+        <div class="row featurette">
+            <div class="col-md-5">
+                <img class="featurette-image img-responsive img-thumbnail" src="{{ url_for('.static', filename='img/How2.png') }}">
+            </div>
+            <div class="col-md-7">
+                <h2 class="featurette-heading">Starting Page <span class="text-muted">The game is about to start.</span></h2>
+                <p class="lead">This prepares you to make a wager when the next page appears.</p>
+            </div>
+        </div>
+        <hr class="featurette-divider">
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="featurette-heading">Wager Page <span class="text-muted">Bet points on the presented category.</span></h2>
+                <p class="lead">Read the category and make a wager based on your knowledge on that category</p>
+            </div>
+            <div class="col-md-5">
+                <img class="featurette-image img-responsive img-thumbnail" src="{{ url_for('.static', filename='img/How3.png') }}">
+            </div>
+        </div>
+        <hr class="featurette-divider">
+        <div class="row featurette">
+            <div class="col-md-5">
+                <img class="featurette-image img-responsive img-thumbnail" src="{{ url_for('.static', filename='img/How4.png') }}">
+            </div>
+            <div class="col-md-7">
+                <h2 class="featurette-heading">Question Page <span class="text-muted">Select your answer.</span></h2>
+                <p class="lead">Given the clue and three possible answers, try to determine the correct answer </p>
+            </div>
+        </div>
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="featurette-heading">Answer Page <span class="text-muted">See the correct answer.</span></h2>
+                <p class="lead">This displays the answer and nothing else</p>
+            </div>
+            <div class="col-md-5">
+                <img class="featurette-image img-responsive img-thumbnail" src="{{ url_for('.static', filename='img/How5.png') }}">
+            </div>
+        </div>
+        <hr class="featurette-divider">
+        <div class="row featurette">
+            <div class="col-md-5">
+                <img class="featurette-image img-responsive img-thumbnail" src="{{ url_for('.static', filename='img/How6.png') }}">
+            </div>
+            <div class="col-md-7">
+                <h2 class="featurette-heading">Results Page <span class="text-muted">Check out your answer and different results from this round.</span></h2>
+                <p class="lead">Compare your answer, check your total point count, and see how bing of a point change happened from this question. This is the last page and will cycle all the way back to the waiting page</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

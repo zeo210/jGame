@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="featurette-heading">jGame! <span class="text-muted">Play every round like Final Jeopardy!</span></h2>
+                <p class="lead">A simple Jeopardy! game where you wager points and answer questions!</p>
+            </div>
+            <div class="col-md-5">
+                <img class="featurette-image img-responsive img-thumbnail" src="{{ url_for('.static', filename='img/About1.png') }}">
+            </div>
+        </div>
+        <hr class="featurette-divider">
+        <div class="row featurette">
+            <div class="col-md-5">
+                <img class="featurette-image img-responsive img-thumbnail" src="{{ url_for('.static', filename='img/About2.png') }}">
+            </div>
+            <div class="col-md-7">
+                <h2 class="featurette-heading">Two styles of game modes. <span class="text-muted">Normal and practice.</span></h2>
+                <p class="lead">Play normal mode to answer questions in a timed environment with other players. Play practice mode to answer questions at your own pace!</p>
+            </div>
+        </div>
+        <hr class="featurette-divider">
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="featurette-heading">Put the game on the big screen! <span class="text-muted">Group play without seperate devices!</span></h2>
+                <p class="lead">Follow along the normal mode as a spectator. Perfect for groups that want to play in person.</p>
+            </div>
+            <div class="col-md-5">
+                <img class="featurette-image img-responsive img-thumbnail" src="{{ url_for('.static', filename='img/About3.png') }}">
+            </div>
+        </div>
+        <hr class="featurette-divider">
+        <div class="row featurette">
+            <div class="col-md-5">
+                <img class="featurette-image img-responsive img-thumbnail" src="{{ url_for('.static', filename='img/About4.png') }}">
+            </div>
+            <div class="col-md-7">
+                <h2 class="featurette-heading">Leaderboard. <span class="text-muted">Track and compare your progress.</span></h2>
+                <p class="lead">Find where you stand in the points leaderboard.</p>
+            </div>
+        </div>
+        <hr class="featurette-divider">
+        <div class="row featurette">
+            <div class="col-md-5">
+                <h2 class="featurette-heading">Bugs still exist. <span class="text-muted">And are still being found.</span></h2>
+                <p class="lead">Here are two I know exist on the Heroku version but having trouble debugging.</p>
+            </div>
+            <div class="col-md-7">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <span class="badge">Heroku Version</span>
+                        Login redirect loops back to login page
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                Suspecting its because of the single dynamo with the game thread running in the background
+                            </li>
+                            <li class="list-group-item">
+                                Works as intended when hosted on my laptop
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">Heroku Version</span>
+                        Game modes involving socket.io fail handshake on first request for a game page
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                Suspecting its because of the single dynamo trying to spawn the game thread and times out handshake request
+                            </li>
+                            <li class="list-group-item">
+                                Does not occur when hosted on my laptop
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <hr class="featurette-divider">
+        <div class="row featurette">
+            <div class="col-md-5">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <span class="badge">Tutorial + Base webapp</span>
+                        Miguel Grinberg's Mega Flask Tutorial
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">Webapp backend</span>
+                        Flask
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">Database</span>
+                        SQLAlchemy
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">Non-game frontend</span>
+                        Bootstrap
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">Game frontend</span>
+                        Reveal.js
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">Game Networking</span>
+                        Socket-IO
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">Python IDE</span>
+                        PyCharm
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">Hosting</span>
+                        Heroku
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-7">
+                <h2 class="featurette-heading">Build with a variety of tools. <span class="text-muted">And help.</span></h2>
+                <p class="lead">These tools and guides helped me build this webapp. I've learned a lot and hope to use this knowledge on my next project.</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
