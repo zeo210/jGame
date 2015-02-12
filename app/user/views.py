@@ -3,7 +3,7 @@ from flask import render_template, flash, redirect, url_for, session, request, g
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from app import app, lm, oid, db
 from app.user.models import User, Email
-from app.user.forms import LoginForm, EditForm
+from app.user.forms import LoginForm, EditForm, SearchForm
 from app.user.constants import ROWS_PER_PAGE
 
 
@@ -14,6 +14,7 @@ def before_request():
         g.user.last_seen = datetime.utcnow()
         db.session.add(g.user)
         db.session.commit()
+        g.search_user = SearchForm()
 
 
 @app.route('/')
@@ -132,3 +133,17 @@ def leaderboard(page=1):
 @app.route('/about')
 def about():
     return render_template('about.html')
+
+
+@app.route('/learn')
+def learn():
+    return render_template('how-to-play.html')
+
+
+@app.route('/search', methods=['POST'])
+def search():
+    if not g.search_user.validate_on_submit():
+        flash("Form is not valid, try again")
+        return redirect(url_for('index'))
+    nickname = g.search_user.data['nickname']
+    return redirect(url_for('user', nickname=nickname))
