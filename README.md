@@ -2,7 +2,7 @@ jGame
 ======
 jGame is a web application where users can wager points and answer questions used in the game show *Jeopardy!*
 
-A current demo of the webapp can be found [here](j-game.herokuapp.com). A link to the "About" page can be found [here](http://j-game.herokuapp.com/about)
+A current demo of the webapp can be found [here](http://j-game.herokuapp.com). A link to the "About" page can be found [here](http://j-game.herokuapp.com/about)
 
 Game Logic
 ------
