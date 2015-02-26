@@ -54,10 +54,16 @@
                         Login redirect loops back to login page
                         <ul class="list-group">
                             <li class="list-group-item">
-                                Suspecting its because of the single dynamo with the game thread running in the background
+                                <s>Suspecting its because of the single dynamo with the game thread running in the background</s>
                             </li>
                             <li class="list-group-item">
-                                Works as intended when hosted on my laptop
+                                UPDATE: Issue is related to debug mode being turned on with the gevent-socketio web server
+                            </li>
+                            <li class="list-group-item">
+                                <s>Works as intended when hosted on my laptop</s>
+                            </li>
+                            <li class="list-group-item">
+                                UPDATE: Also occurs when you use "debug_socket_run.py" ["debug_run.py" and "socket_run.py" work as intended]
                             </li>
                         </ul>
                     </li>
